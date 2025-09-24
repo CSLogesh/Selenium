@@ -1,6 +1,5 @@
 package learning;
 
-import java.awt.event.KeyEvent;
 import java.time.Duration;
 
 import org.openqa.selenium.By;
@@ -21,7 +20,7 @@ WebDriver driver;
 	public void setup()
 	{
 		driver = new ChromeDriver();
-		driver.get("https://testautomationpractice.blogspot.com/");
+		driver.get("https://text-compare.com/");
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 	}
@@ -37,14 +36,38 @@ WebDriver driver;
 	@Test
 	public void test_KeyboardActions()
 	{
-		WebElement namebox = driver.findElement(By.id("name"));
-		WebElement emailbox = driver.findElement(By.id("email"));
-		WebElement phonenobox = driver.findElement(By.id("phone"));
+		WebElement textbox1 = driver.findElement(By.id("inputText1"));
+		WebElement textbox2 = driver.findElement(By.id("inputText2"));
+		
+		textbox1.sendKeys("Welcome to Selenium Keyboard Actions program.....");
 		
 		Actions act = new Actions(driver);
+		act.keyDown(Keys.CONTROL);
+		act.sendKeys("a");
+		act.keyUp(Keys.CONTROL);
+		act.perform();
 		
-		act.sendKeys(namebox, "Logueswar").perform();
-		act.sendKeys(emailbox, "eswarviji95@gmail.com").perform();
-		act.sendKeys(phonenobox, "100").perform();
+		act.keyDown(Keys.CONTROL);
+		act.sendKeys("c");
+		act.keyUp(Keys.CONTROL);
+		act.perform();
+		
+		act.sendKeys(Keys.TAB);
+		act.perform();
+		
+		act.keyDown(Keys.CONTROL);
+		act.sendKeys("v");
+		act.keyUp(Keys.CONTROL);
+		act.perform();
+		
+		if(textbox1.getAttribute("value").equals(textbox2.getAttribute("value")))
+		{
+			System.out.println("Text has been copied successfully...");
+		}
+		else
+		{
+			System.out.println("Text mismatch , copy action using keyboard keys failed...");
+		}
+		
 	}
 }

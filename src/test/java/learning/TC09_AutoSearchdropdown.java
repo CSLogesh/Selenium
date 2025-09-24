@@ -7,12 +7,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-public class TC09_GoogleSearchdropdown 
+public class TC09_AutoSearchdropdown 
 {
 
 	WebDriver driver;
@@ -21,7 +20,7 @@ public class TC09_GoogleSearchdropdown
 	public void setup()
 	{
 		driver = new ChromeDriver();
-		driver.get("https://www.google.com/");
+		driver.get("https://www.bing.com/");
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 	}
@@ -35,22 +34,19 @@ public class TC09_GoogleSearchdropdown
 	@Test
 	public void test_autosearchdropdwon()
 	{
-		try
-		{
-		driver.findElement(By.name("q")).sendKeys("Eclipse");
-		List<WebElement> elements = driver.findElements(By.xpath("//li[@role='presentation' and @data-attrid='AutocompletePrediction']"));
+		
+		driver.findElement(By.id("sb_form_q")).sendKeys("Eclipse");
+		List<WebElement> elements = driver.findElements(By.xpath("//li[@role='option']/div[@class='sa_tm']/span"));
 		
 		for(WebElement ele : elements)
 		{
-			//driver.findElement(By.xpath("jijn"))
+			if(ele.getText().equals("eclipse ide"))
+			{
+				ele.click();
+				break;
+			}
 		}
 		
-		//boolean displayed = driver.findElement(By.xpath("//*[text()='eclipse download for windows']")).isDisplayed();
-		//Assert.assertTrue(displayed);
-		}
-		catch(Exception e)
-		{
-			Assert.fail();
-		}
+	
 	}
 }

@@ -24,28 +24,33 @@ public class TC32_JavascriptExecutorMethods
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 	}
 	
-	/*
+	
 	@AfterClass
 	public void teardown()
 	{
 		driver.quit();
 	}
-	*/
+	
 	
 	@Test
-	public void test_jsmethods()
+	public void test_jsmethods() throws Exception
 	{
-		WebElement ele = driver.findElement(By.xpath("//*[text()='GUI Elements']"));
-		WebElement namebox = driver.findElement(By.id("name"));
-		WebElement header = driver.findElement(By.xpath("//*[text()='Colors:']"));
+	
 		
-		JavascriptExecutor js = (JavascriptExecutor) driver;
-		js.executeScript("arguments[0].setAttribute('value','Logueswar CS')", namebox);
-		//js.executeScript("arguments[0].click();", ele);
-		//js.executeScript("arguments[0].scrollIntoView();", header);
-		js.executeScript("window.scrollBy(0,document.body.scroll.Height)");
-		js.executeScript("document.body.style.zoom='40%'");
+		WebElement tabslogo = driver.findElement(By.xpath("//*[text()='Tabs']"));
+		WebElement elementslink = driver.findElement(By.xpath("//*[text()='GUI Elements']"));
+		JavascriptExecutor js = (JavascriptExecutor) driver ;
 		
+		js.executeScript("arguments[0].style.border='3px solid red'", tabslogo); // drawborder
+		js.executeScript("arguments[0].click();", elementslink); // click using javascriptexecutor
+		js.executeScript("history.go(0)"); // refresh page
+		js.executeScript("window.scrollTo(0,document.body.scrollHeight)"); // scrolldown
+		Thread.sleep(2000);
+		js.executeScript("window.scrollBy(0,-document.body.scrollHeight)"); // scrollup
+		js.executeScript("document.body.style.zoom='150%'"); // pagezoom 
+		
+		String title = js.executeScript("return document.title").toString(); // gettitle using js
+		System.out.println("title of the webpage is -->"+title);
 	}
 }
 

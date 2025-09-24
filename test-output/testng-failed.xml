@@ -3,13 +3,12 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="learning.TC38_ChromeOptions">
+      <class name="learning.TC36_FileuploadsusingRobotClass">
         <methods>
-          <include name="test_chromeoptions"/>
+          <include name="test_uploadusingrobot"/>
           <include name="setup"/>
-          <include name="teardown"/>
         </methods>
-      </class> <!-- learning.TC38_ChromeOptions -->
+      </class> <!-- learning.TC36_FileuploadsusingRobotClass -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

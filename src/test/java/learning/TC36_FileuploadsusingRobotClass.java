@@ -7,6 +7,7 @@ import java.awt.event.KeyEvent;
 import java.time.Duration;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -22,7 +23,7 @@ public class TC36_FileuploadsusingRobotClass
 	public void setup()
 	{
 		driver = new ChromeDriver();
-		driver.get("https://www.tutorialspoint.com/selenium/practice/upload-download.php");
+		driver.get("https://practice.expandtesting.com/upload");
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 	}
@@ -37,9 +38,10 @@ public class TC36_FileuploadsusingRobotClass
 	@Test
 	public void test_uploadusingrobot() throws Exception
 	{
-		WebElement element = driver.findElement(By.id("uploadFile"));
-		element.click();
-		System.out.println("element clicked...");
+		WebElement uploadfilebtn = driver.findElement(By.id("fileInput"));
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("arguments[0].click();", uploadfilebtn);
+		System.out.println("Choose File button clicked...");
 				
 		Robot rb = new Robot();
 		rb.delay(2000);
@@ -55,8 +57,9 @@ public class TC36_FileuploadsusingRobotClass
 		rb.keyPress(KeyEvent.VK_ENTER);
 		rb.keyRelease(KeyEvent.VK_ENTER);
 		
-		System.out.println(driver.findElement(By.id("uploadFile")).getText());
-		//System.out.println("File has been uploaded successfully through robot class...");
+		WebElement submitbtn = driver.findElement(By.id("fileSubmit"));
+		js.executeScript("arguments[0].click();", submitbtn);
+		System.out.println("File upload completed...");
 		
 	}
 	

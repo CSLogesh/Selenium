@@ -35,12 +35,16 @@ public class TC33_HandleCookies
 	{
 		Set<Cookie> cookies = driver.manage().getCookies();
 		ArrayList<Cookie> list = new ArrayList<Cookie>(cookies);
-		System.out.println("Total number of cookies available in the webapage is "+list.size());
-		for(Cookie ck : list)
+		System.out.println("Total number of cookies available in the webapage before adding user created cookie is "+list.size());
+		for(Cookie li:list)
 		{
-			String value = ck.getValue();
-			System.out.println("Value of Cookie is "+value);
+			System.out.println(li.getName()+"  "+li.getValue());
 		}
+		/*
+		Cookie cookie = new Cookie("Cookie123", "12345678");
+		driver.manage().addCookie(cookie);
+		System.out.println("Total number of cookies available in the webapage After adding user created cookie is "+list.size());
+		*/
 		
 	}
 }

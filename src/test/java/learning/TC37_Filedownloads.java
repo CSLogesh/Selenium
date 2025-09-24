@@ -2,7 +2,6 @@ package learning;
 
 import java.time.Duration;
 import java.util.HashMap;
-import java.util.Map;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -19,10 +18,10 @@ public class TC37_Filedownloads
 	@BeforeClass
 	public void setup()
 	{
-		String filepath = new String(".\\Downloads");
+		String loc = new String(System.getProperty("user.dir")+"\\Downloads");
 		ChromeOptions options = new ChromeOptions();
-		Map<String,Object> preferences = new HashMap<>();
-		preferences.put("download.default_directory", filepath);
+		HashMap<String, String> preferences = new HashMap<String, String>();
+		preferences.put("download.default_directory", loc);
 		options.setExperimentalOption("prefs", preferences);
 		driver = new ChromeDriver(options);
 		driver.get("https://www.tutorialspoint.com/selenium/practice/upload-download.php");
